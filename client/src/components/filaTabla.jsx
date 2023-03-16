@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 
 function FilaInformes() 
 {
     const [infoArchivos, setInfoArchivos] = useState({})
+    const {ing, id} = useParams()
 
     //Consumo de api
     useEffect(() => {
-        fetch('http://localhost:3000/consultar/laura/1')
+        fetch(`http://172.19.0.99:3000/consultar/${ing}/${id}`)
         .then(response => response.json())
-        .then(data => setInfoArchivos(data));
+        .then(data => setInfoArchivos(data))
+        .catch(error => console.log(error))
     }, [])
 
     return (

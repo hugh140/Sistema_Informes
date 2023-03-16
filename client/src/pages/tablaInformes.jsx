@@ -4,7 +4,7 @@ function TablaInformes()
 {
     return (
         <>
-        <h1>Sistema de almacenamiento de Informes Técnicos</h1>
+        <h1 className="text-center">Sistema de almacenamiento de Informes Técnicos</h1>
         <table className="table">
         <thead>
             <tr>
