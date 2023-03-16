@@ -1,12 +1,15 @@
-import TablaInformes from "./components/tablaInformes"
+import TablaInformes from "./pages/tablaInformes"
+import detectarCodigoKonami from "./scripts/codigo_konami"
+import { BrowserRouter } from "react-router-dom";
+
+detectarCodigoKonami()
 
 function App() 
 {
   return (
-    <>
-    <h1>Sistema de almacenamiento de Informes Técnicos</h1>
-    <TablaInformes />
-    </>
+    <BrowserRouter>
+      <TablaInformes />
+    </BrowserRouter>
   )
 }
 export default App

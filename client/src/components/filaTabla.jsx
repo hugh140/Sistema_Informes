@@ -17,7 +17,6 @@ function FilaInformes()
             let icon
             if (infoArchivo.extension === '.pdf') icon = 'pdf'
             else icon = 'word'
-            console.log(icon)
 
             return (
             <tr key={index}>

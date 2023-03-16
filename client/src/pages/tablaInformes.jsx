@@ -1,8 +1,10 @@
-import FilaInformes from "./filaTabla"
+import FilaInformes from "../components/filaTabla"
 
 function TablaInformes() 
 {
     return (
+        <>
+        <h1>Sistema de almacenamiento de Informes Técnicos</h1>
         <table className="table">
         <thead>
             <tr>
@@ -14,6 +16,7 @@ function TablaInformes()
             <FilaInformes />
         </tbody>
         </table>
+        </>
     )
 }
 export default TablaInformes
