@@ -26,8 +26,8 @@ app.get('/consultar/:ing/:page', (req, res) =>
         if (error) return res.status(400).send('El directorio no existe.')
 
         const numeroPagina = Number(req.params.page)
-        const paginaInicio = (numeroPagina - 1) * 50
-        const limitePagina = numeroPagina * 50
+        const paginaInicio = (numeroPagina - 1) * 20
+        const limitePagina = numeroPagina * 20
 
         //Sistema de paginación para colapsar las consultas
         for (let i = paginaInicio; i < limitePagina; i++) {

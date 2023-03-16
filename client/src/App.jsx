@@ -7,7 +7,7 @@ detectarCodigoKonami()
 function App() 
 {
   return (
-    <BrowserRouter>
+    <BrowserRouter forceRefresh={true}>
       <Routes>
         <Route path='/consultar/:ing/:id' element={<TablaInformes />} />
       </Routes>

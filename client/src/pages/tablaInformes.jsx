@@ -1,10 +1,15 @@
-import FilaInformes from "../components/filaTabla"
+import FilaInformes from "../components/FilaTabla"
+import BotonNavegacion from "../components/BotonNavegacion"
 
 function TablaInformes() 
 {
     return (
         <>
         <h1 className="text-center">Sistema de almacenamiento de Informes Técnicos</h1>
+
+        <BotonNavegacion link='/consultar/laura/' modo={-1} texto='Atrás' />
+        <BotonNavegacion link='/consultar/laura/' modo={1} texto='Adelante' />
+
         <table className="table">
         <thead>
             <tr>
@@ -16,6 +21,9 @@ function TablaInformes()
             <FilaInformes />
         </tbody>
         </table>
+
+        <BotonNavegacion link='/consultar/laura/' modo={-1} texto='Atrás' />
+        <BotonNavegacion link='/consultar/laura/' modo={1} texto='Adelante' />
         </>
     )
 }

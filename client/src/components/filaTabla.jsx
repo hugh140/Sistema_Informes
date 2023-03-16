@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom"
 
 function FilaInformes() 
 {
-    const [infoArchivos, setInfoArchivos] = useState({})
     const {ing, id} = useParams()
+    const [infoArchivos, setInfoArchivos] = useState({})
 
     //Consumo de api
     useEffect(() => {
