@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react"
+import FilaInformes from "./filaTabla"
 
 function TablaInformes() 
 {
-    const [DownloadURL, setDownloadURL] = useState('')
-    console.log(DownloadURL)
-
     return (
         <table className="table">
         <thead>
@@ -14,16 +11,7 @@ function TablaInformes()
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <i className="fa-solid fa-file-word me-3"></i>
-                    <a href='http://localhost:3000/descargar/laura/Probabilidad.pdf'>
-                        Archivo.pdf
-                    </a>
-                </td>
-                <td>14-02-2023</td>
-            </tr>
-            
+            <FilaInformes />
         </tbody>
         </table>
     )

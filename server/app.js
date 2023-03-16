@@ -2,9 +2,13 @@ const express = require('express')
 const fileUpload = require('express-fileupload')
 const detectarExtension = require('./scripts/detectarExtension')
 const fs = require('fs')
+const cors = require('cors')
 const { extname } = require('path')
 
 const app = express()
+app.use(cors({
+    origin: '*'
+}))
 app.use(fileUpload({
     defCharset: 'utf8',
     defParamCharset: 'utf8'
