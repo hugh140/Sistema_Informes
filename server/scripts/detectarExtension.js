@@ -1,7 +1,9 @@
 //Agregar las extensiones válidas a subir
 const extensionesValidas = [
     '.pdf',
-    '.docx'
+    '.docx',
+    '.ocx',
+    '.ocm'
 ]
 
 module.exports = function detectarExtension (nombreArchivo) {

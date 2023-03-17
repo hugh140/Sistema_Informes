@@ -11,7 +11,10 @@ app.use(cors({
 }))
 app.use(fileUpload({
     defCharset: 'utf8',
-    defParamCharset: 'utf8'
+    defParamCharset: 'utf8',
+    useTempFiles: true,
+    safeFileNames: true,
+    preserveExtension: true
 }));
 
 //Método get para consultar archivos del directorio
@@ -116,11 +119,11 @@ app.post('/subir/:ing', (req, res) =>
     archivosVerificados.forEach(archivo => {
         const dirSubida = dirCarpeta + '/' + archivo.name
         archivo.mv(dirSubida, 'ut8', (error) => {
-            if (error) throw res.status(500).send(error)
+            if (error) throw res.status(500).json(error)
         })
         alertaArchivos += `\nEl archivo ${archivo.name} se han subido correctamente`
     })
-    res.send(alertaArchivos)
+    res.json(alertaArchivos)
 })
 
 app.listen(3000, () => 'Conectado en el puerto 3000')
