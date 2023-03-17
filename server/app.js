@@ -44,7 +44,7 @@ app.get('/consultar/:ing/:page', (req, res) =>
             else break
         }
         if (archivos.toString()) res.json(archivos)
-        else res.status(404).send('No existen archivos en esta página.')
+        else res.status(404).json('No existen archivos en esta página.')
     })
 })
 

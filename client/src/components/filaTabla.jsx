@@ -1,22 +1,8 @@
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-
-function FilaInformes() 
+function FilaInformes({infoArchivos}) 
 {
-    const {ing, id} = useParams()
-    const [infoArchivos, setInfoArchivos] = useState({})
-
-    //Consumo de api
-    useEffect(() => {
-        fetch(`http://172.19.0.99:3000/consultar/${ing}/${id}`)
-        .then(response => response.json())
-        .then(data => setInfoArchivos(data))
-        .catch(error => console.log(error))
-    }, [])
-
     return (
-        <>
-        {Object.values(infoArchivos).map((infoArchivo, index) => {
+        <>{
+        Object.values(infoArchivos).map((infoArchivo, index) => {
             let icon
             if (infoArchivo.extension === '.pdf') icon = 'pdf'
             else icon = 'word'
@@ -31,8 +17,8 @@ function FilaInformes()
                 </td>
                 <td>{infoArchivo.fecha}</td>
             </tr>
-        )})}
-        </>
+        )})
+        }</>
     )
 }
 export default FilaInformes

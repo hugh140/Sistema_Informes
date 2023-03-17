@@ -1,4 +1,4 @@
-import TablaInformes from "./pages/tablaInformes"
+import TablaInformes from "./pages/TablaInformes"
 import detectarCodigoKonami from "./scripts/codigo_konami"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 

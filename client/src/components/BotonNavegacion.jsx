@@ -3,14 +3,19 @@ import { useParams, NavLink } from "react-router-dom"
 function BotonNavegacion({modo, link, texto}) 
 {
     const {id} = useParams()
-    const destLink = link + (Number(id) + modo)
+    const className = 'btn btn-outline-info me-3 ' +
+        (modo === 1 ? 'float-end' : null)
+    let numeroPagina = (Number(id) + modo)
 
     return (
-        <NavLink to={'/consultar/laura/' + (Number(id) + modo)}>
-            <button className='btn btn-outline-info me-3' onClick={' '}>
+        <>{
+        numeroPagina < 1 ? null : (
+        <NavLink to={'/consultar/laura/' + numeroPagina}>
+            <button className={className} onClick={' '}>
                     {texto}
             </button>
         </NavLink>
+        )}</>
     )
 }
 export default BotonNavegacion
