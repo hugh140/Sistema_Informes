@@ -48,6 +48,16 @@ app.get('/consultar/:ing/:page', (req, res) =>
     })
 })
 
+//Método get para obtener nombres de ingenieros
+app.get('/consultar', (req, res) => 
+{
+    const dirConsulta = __dirname + '/informes_tecnicos'
+    fs.readdir(dirConsulta, (error, files) => {
+        if (error) return res.status(400).send('El directorio no existe.')
+        res.json(files)
+    })
+})
+
 //Método get para descargar archivos del directorio
 app.get('/descargar/:ing/:archivo', (req, res) => 
 {

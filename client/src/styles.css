@@ -1,0 +1,10 @@
+.ing-card {
+    background-color: #88C6F0;
+    cursor: pointer;
+}
+.ing-card:hover {
+    background-color: #5AA8DD;
+}
+a {
+    text-decoration: none;
+}

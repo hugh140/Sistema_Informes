@@ -10,7 +10,7 @@ function BotonNavegacion({modo, link, texto})
     return (
         <>{
         numeroPagina < 1 ? null : (
-        <NavLink to={'/consultar/laura/' + numeroPagina}>
+        <NavLink to={link + numeroPagina}>
             <button className={className} onClick={' '}>
                     {texto}
             </button>

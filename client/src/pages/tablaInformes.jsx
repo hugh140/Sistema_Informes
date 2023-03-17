@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, NavLink } from "react-router-dom"
 import FilaInformes from "../components/FilaTabla"
 import BotonNavegacion from "../components/BotonNavegacion"
 
@@ -23,8 +23,17 @@ function TablaInformes()
 
     return (
         <>
+        <div className="row text-center">
+            <div className="col-lg-4">
+                <NavLink to='/consultar'>
+                    <div className="text-white py-3 ing-card h5">
+                        Inicio
+                    </div>
+                </NavLink>
+            </div>
+        </div>
         <h1 className="text-center display-1">SAIT</h1>
-        <BotonNavegacion link='/consultar/laura/' modo={-1} texto='Atrás' />
+        <BotonNavegacion link={`/consultar/${ing}/`} modo={-1} texto='Atrás' />
 
         {
         status === 404 
@@ -34,7 +43,7 @@ function TablaInformes()
         </div> 
             :
         <>
-        <BotonNavegacion link='/consultar/laura/' modo={1} texto='Adelante' />
+        <BotonNavegacion link={`/consultar/${ing}/`} modo={1} texto='Adelante' />
         <table className="table">
         <thead>
             <tr>
@@ -46,7 +55,7 @@ function TablaInformes()
             <FilaInformes infoArchivos={infoArchivos} />
         </tbody>
         </table>
-        <BotonNavegacion link='/consultar/laura/' modo={1} texto='Adelante' />
+        <BotonNavegacion link={`/consultar/${ing}/`} modo={1} texto='Adelante' />
         </>
         }
         </>
