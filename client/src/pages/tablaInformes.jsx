@@ -22,10 +22,10 @@ function TablaInformes()
     }, [])
 
     return (
-        <>
+        <div className="container">
         <div className="row text-center">
             <div className="col-lg-4">
-                <NavLink to='/consultar'>
+                <NavLink to='/'>
                     <div className="text-white py-3 ing-card h5">
                         Inicio
                     </div>
@@ -58,7 +58,7 @@ function TablaInformes()
         <BotonNavegacion link={`/consultar/${ing}/`} modo={1} texto='Adelante' />
         </>
         }
-        </>
+        </div>
     )
 }
 export default TablaInformes

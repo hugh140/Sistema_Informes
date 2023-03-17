@@ -4,7 +4,7 @@ function ElegirIng()
 {
     return (
         <>
-        <h1 className="text-center display-1">InfyHugo</h1>
+        <h1 className="text-center display-1">SAIT</h1>
         <div className="container">
             <div className="row text-center">
                 <CardIngeniero />

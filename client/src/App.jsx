@@ -11,7 +11,7 @@ function App()
     <BrowserRouter forceRefresh={true}>
       <Routes>
         <Route path='/consultar/:ing/:id' element={<TablaInformes />} />
-        <Route path='/consultar' element={<ElegirIng />} />
+        <Route path='/' element={<ElegirIng />} />
       </Routes>
     </BrowserRouter>
   )
