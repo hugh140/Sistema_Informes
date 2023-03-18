@@ -5,6 +5,11 @@ import BotonNavegacion from "../components/BotonNavegacion"
 
 import { ENDPOINT } from "../scripts/endpoints"
 
+const MODO = {
+    ADELANTAR: 1,
+    RETROCEDER: -1
+}
+
 function TablaInformes()
 {
     const [infoArchivos, setInfoArchivos] = useState({})
@@ -35,7 +40,7 @@ function TablaInformes()
             </div>
         </div>
         <h1 className="text-center display-1">SAIT</h1>
-        <BotonNavegacion link={`/consultar/${ing}/`} modo={-1} texto='Atrás' />
+        <BotonNavegacion link={`/consultar/${ing}/`} modo={MODO.RETROCEDER} texto='Atrás' />
 
         {
         status === 404 
@@ -45,7 +50,7 @@ function TablaInformes()
         </div> 
             :
         <>
-        <BotonNavegacion link={`/consultar/${ing}/`} modo={1} texto='Adelante' />
+        <BotonNavegacion link={`/consultar/${ing}/`} modo={MODO.ADELANTAR} texto='Adelante' />
         <table className="table">
         <thead>
             <tr>
@@ -57,7 +62,7 @@ function TablaInformes()
             <FilaInformes infoArchivos={infoArchivos} />
         </tbody>
         </table>
-        <BotonNavegacion link={`/consultar/${ing}/`} modo={1} texto='Adelante' />
+        <BotonNavegacion link={`/consultar/${ing}/`} modo={MODO.ADELANTAR} texto='Adelante' />
         </>
         }
         </div>

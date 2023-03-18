@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
+import { ENDPOINT } from "../scripts/endpoints"
 import '../styles.css'
 
 function CardIngeniero() 
@@ -7,7 +8,7 @@ function CardIngeniero()
     const [ingenieros, setIngenieros] = useState({})
 
     useEffect(() => {
-        fetch(`http://localhost:3000/consultar`)
+        fetch(ENDPOINT.CONSULTAR)
         .then(response => response.json())
         .then(data => setIngenieros(data))
         .catch(error => console.log(error))

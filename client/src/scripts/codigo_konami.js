@@ -11,6 +11,7 @@ const codigoKonami = [
     'a',
     'Enter'
 ]
+const easterEgg = 'https://www.youtube.com/watch?v=xvFZjo5PgG0'
 
 function detectarCodigoKonami() 
 {
@@ -27,7 +28,7 @@ function detectarCodigoKonami()
             codigoEscrito = []
         }
         if (codigoEscrito.toString() === codigoKonami.toString())
-            window.location.href = 'https://www.youtube.com/watch?v=xvFZjo5PgG0'
+            window.location.href = easterEgg
     })
 }
 export default detectarCodigoKonami
