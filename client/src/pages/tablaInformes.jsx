@@ -3,6 +3,8 @@ import { useParams, NavLink } from "react-router-dom"
 import FilaInformes from "../components/FilaTabla"
 import BotonNavegacion from "../components/BotonNavegacion"
 
+import { ENDPOINT } from "../scripts/endpoints"
+
 function TablaInformes()
 {
     const [infoArchivos, setInfoArchivos] = useState({})
@@ -12,7 +14,7 @@ function TablaInformes()
 
     //Consumo de api
     useEffect(() => {
-        fetch(`http://localhost:3000/consultar/${ing}/${id}`)
+        fetch(ENDPOINT.CONSULTAR + `${ing}/${id}`)
         .then(response => {
             setStatus(response.status)
             return response.json()

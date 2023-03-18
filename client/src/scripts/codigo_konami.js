@@ -27,7 +27,7 @@ function detectarCodigoKonami()
             codigoEscrito = []
         }
         if (codigoEscrito.toString() === codigoKonami.toString())
-            window.location.href = 'https://hugh140.github.io/tik-tak-toe-deploy/'
+            window.location.href = 'https://www.youtube.com/watch?v=xvFZjo5PgG0'
     })
 }
 export default detectarCodigoKonami

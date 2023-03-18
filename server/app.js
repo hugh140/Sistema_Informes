@@ -11,10 +11,7 @@ app.use(cors({
 }))
 app.use(fileUpload({
     defCharset: 'utf8',
-    defParamCharset: 'utf8',
-    useTempFiles: true,
-    safeFileNames: true,
-    preserveExtension: true
+    defParamCharset: 'utf8'
 }));
 
 //Método get para consultar archivos del directorio
@@ -88,19 +85,25 @@ app.post('/subir/:ing', (req, res) =>
 
     //Verificar si la extensión es correcta (solamente {.doc, .pdf})
     let archivosVerificados = []
-    let alertaArchivos = ''
+    let alertaArchivos = []
 
     //Por si existen varios archivos
     if (informesArchivo.length) {
         for (const informe of informesArchivo) {
             //Detectar extensiones incorrectas
             if (!detectarExtension(informe.name)) {
-                alertaArchivos += `El archivo ${informe.name} tiene una extensión inválida.\n`
+                alertaArchivos.push({
+                    mensaje: `El archivo ${informe.name} tiene una extensión inválida.`,
+                    estado: 'error'
+                })
                 continue
             }
             //Limitar el peso de la subida de archivos a 5mb
             if (informe.size >= 5000000) {
-                alertaArchivos += `El archivo ${informe.name} es demasiado pesado. Solo se aceptan archivos menores a 5MB.\n`
+                alertaArchivos.push({
+                    mensaje: `El archivo ${informe.name} es demasiado pesado. Solo se aceptan archivos menores a 5MB.`,
+                    estado: 'error'
+                })
                 continue
             }
             archivosVerificados.push(informe)
@@ -108,10 +111,16 @@ app.post('/subir/:ing', (req, res) =>
     //Por si sólo existe un archivo
     } else {
         if (!detectarExtension(informesArchivo.name))
-            alertaArchivos += `El archivo ${informesArchivo.name} tiene una extensión inválida.\n`
+            alertaArchivos.push({
+                mensaje: `El archivo ${informesArchivo.name} tiene una extensión inválida.`,
+                estado: 'error'
+            })
         //Limitar el peso de la subida de archivos a 5mb
         if (informesArchivo.size >= 5000000)
-            alertaArchivos += `El archivo ${informesArchivo.name} es demasiado pesado. Solo se aceptan archivos menores a 5MB.\n`
+            alertaArchivos.push({
+                mensaje: `El archivo ${informesArchivo.name} es demasiado pesado. Solo se aceptan archivos menores a 5MB.`,
+                estado: 'error'
+            })
         archivosVerificados.push(informesArchivo)
     }
 
@@ -121,7 +130,10 @@ app.post('/subir/:ing', (req, res) =>
         archivo.mv(dirSubida, 'ut8', (error) => {
             if (error) throw res.status(500).json(error)
         })
-        alertaArchivos += `\nEl archivo ${archivo.name} se han subido correctamente`
+        alertaArchivos.push({
+            mensaje : `El archivo ${archivo.name} se han subido correctamente`,
+            estado: 'ok'
+        })
     })
     res.json(alertaArchivos)
 })

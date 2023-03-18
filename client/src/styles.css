@@ -5,6 +5,12 @@
 .ing-card:hover {
     background-color: #5AA8DD;
 }
+.alerta-ok {
+    color: green;
+}
+.alerta-error {
+    color: red;
+}
 a {
     text-decoration: none;
 }
