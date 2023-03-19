@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
-import { ENDPOINT } from "../scripts/endpoints"
+import { ENDPOINT } from "../constants/endpoints"
 import '../styles.css'
 
 function CardIngeniero() 
@@ -25,7 +25,7 @@ function CardIngeniero()
                 </NavLink>
                 <NavLink to={`/subir/${ing}`}>
                     <div className="text-white py-2 ms-2 me-2 mb-2 h4 rounded-bottom ing-card-subir">
-                        <i class="fa-solid fa-plus"></i>
+                        <i className="fa-solid fa-plus"></i>
                     </div>
                 </NavLink>
             </main>

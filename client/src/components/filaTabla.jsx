@@ -1,4 +1,4 @@
-import { ENDPOINT } from "../scripts/endpoints"
+import { ENDPOINT } from "../constants/endpoints"
 import { useParams} from "react-router-dom"
 
 function FilaInformes({infoArchivos}) 

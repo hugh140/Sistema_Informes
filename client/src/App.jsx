@@ -3,7 +3,7 @@ import TablaInformes from "./pages/TablaInformes"
 import ElegirIng from "./pages/ElegirIng";
 import SubirInformes from "./pages/SubirInformes";
 
-import detectarCodigoKonami from "./scripts/codigo_konami"
+import detectarCodigoKonami from "./scripts/codigoKonami"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 detectarCodigoKonami()

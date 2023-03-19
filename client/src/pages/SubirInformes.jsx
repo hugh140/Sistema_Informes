@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { ENDPOINT } from "../scripts/endpoints"
+import { ENDPOINT } from "../constants/endpoints"
 import subirInforme from "../scripts/subirInformeAPI"
-import detectarExtension from "../scripts/detectarExtension"
+import detectarAlertas from "../scripts/detectarAlertas"
+import { dragOver, 
+    eliminarArchivo,
+    fileListToArray } 
+    from "../scripts/dragdropEvents"
 import '../styles.css'
 
 import DragAndDropBox from "../components/DragAndDropBox"
@@ -30,24 +34,12 @@ function SubirInformes()
 
     function submit(e) {
         e.preventDefault()
-        if (!files.length) {
-            setAlerta([{
-                mensaje: 'No se han subido archivos aún.',
-                estado: 'error'
-            }])
-            return
-        }
-        else if (!detectarExtension(files)) {
-            setAlerta([{
-                mensaje: 'Alguno de los archivos tiene una extensión inválida. Vuelve a subir',
-                estado: 'error'
-            }])
-            return
-        }
-        else setAlerta([{
-            mensaje: 'Subiendo los archivos...',
-            estado: 'cargando'
-        }])
+
+        const alertaConsola = detectarAlertas(files)
+        console.log(alertaConsola)
+        setAlerta([alertaConsola])
+        if (alertaConsola.estado === 'error') return
+
         const data = subirInforme(e, files, selectIng)
 
         fetch(ENDPOINT.SUBIR + selectIng, {
@@ -62,31 +54,15 @@ function SubirInformes()
         })
         .catch(error => console.log(error))
     }
-    function fileListToArray(fileList) {
-        const newFiles = [...files]
-        Array.from(fileList).forEach(file =>
-            newFiles.push(file))
-        setFiles(newFiles)
-    } 
-    function dragOver(e) {
-        e.preventDefault()
-        setClassName('drag-over')
-    }
-    function drop(e) {
+    
+    const eliminarFile = e => setFiles(eliminarArchivo(e, files))
+    const handleDragOver = e => setClassName(dragOver(e))
+    const handleChangeBox = e => setFiles(e.target.files, files)
+    const handleChangeSelect = e => setSelectIng(e.target.value)
+    const handleDrop = e => {
         e.preventDefault()
         setClassName(null)
-        fileListToArray(e.dataTransfer.files)
-    }
-    function changeBox(e) {
-        fileListToArray(e.target.files)
-    }
-    function changeSelect(e) {
-        setSelectIng(e.target.value)
-    }
-    function eliminarArchivo(e) {
-        const newFiles = [...files]
-        newFiles.splice(Number(e.target.dataset.eliminar), 1)
-        setFiles(newFiles)
+        setFiles(e.dataTransfer.files, files)
     }
 
     return (
@@ -97,14 +73,14 @@ function SubirInformes()
             <DragAndDropBox 
                 files={files} 
                 className={className} 
-                drop={drop} 
-                dragOver={dragOver} 
-                change={changeBox}
+                drop={handleDrop} 
+                dragOver={handleDragOver} 
+                change={handleChangeBox}
             />
             <br className="mt-3" />
             <h6 className="mb-3">Directorio a subir: {selectIng}</h6>
             <DropDownMenu 
-                change={changeSelect} 
+                change={handleChangeSelect} 
                 ing={ing} 
                 ingenieros={ingenieros} 
             />
@@ -114,7 +90,7 @@ function SubirInformes()
         <Consola 
             alertas={alertas} 
             files={Object.values(files)}
-            eliminarArchivo={eliminarArchivo} />
+            eliminarArchivo={eliminarFile} />
         </main>
     )
 }

@@ -5,7 +5,7 @@ import FilaInformes from "../components/FilaTabla"
 import BotonNavegacion from "../components/BotonNavegacion"
 import NavBar from "../components/NavBar"
 
-import { ENDPOINT } from "../scripts/endpoints"
+import { ENDPOINT } from "../constants/endpoints"
 
 const MODO = {
     ADELANTAR: 1,

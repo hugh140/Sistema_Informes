@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { NavLink, useParams } from "react-router-dom"
-import { ENDPOINT } from "../scripts/endpoints"
+import { ENDPOINT } from "../constants/endpoints"
 
 function NavBar() 
 {

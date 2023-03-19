@@ -1,10 +1,27 @@
-//Agregar las extensiones válidas a subir
-const extensionesValidas = [
-    '.pdf',
-    '.docx',
-    '.ocx',
-    '.ocm'
-]
+import { PESO, alertas, extensionesValidas } 
+    from "../constants/constantesAlertas"
+
+function detectarAlertas(archivos) 
+{
+    if (!archivos.length) 
+        return alertas.faltaArchivos
+
+    else if (!detectarExtension(archivos)) 
+        return alertas.extInvalida  
+
+    else if (!detectarPeso(archivos))
+        return alertas.pesoExagerado
+
+    else return alertas.cargando
+} 
+
+function detectarPeso(archivos) 
+{
+    for (const archivo of archivos)
+        if (archivo.size >= PESO)
+            return false
+    return true
+}
 
 function detectarExtension (archivos) 
 {
@@ -29,4 +46,4 @@ function detectarExtension (archivos)
     }
     return true
 }
-export default detectarExtension
+export default detectarAlertas
