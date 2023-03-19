@@ -11,6 +11,7 @@ const subirInformes = require('./methods/subirInformes')
 
 const verificarUsuario = require('./login_system/verificarUsuario')
 const administrador = require('./login_system/administrador')
+const cierreAdministrador = require('./login_system/cierreAdministrador')
 
 const app = express()
 const dirInformes = __dirname + '/informes_tecnicos/'
@@ -45,5 +46,6 @@ app.post('/subir/:ing', (req, res) =>
 //-----LOGIN-----
 app.post('/login', verificarUsuario)
 app.get('/admin', administrador)
+app.delete('/admin/logout', cierreAdministrador)
 
 app.listen(PORT, () => 'Conectado en el puerto ' + PORT)
