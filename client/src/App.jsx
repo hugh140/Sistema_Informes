@@ -15,7 +15,7 @@ function App()
       <Routes>
         <Route path='/consultar/:ing/:id' element={<TablaInformes />} />
         <Route path='/' element={<ElegirIng />} />
-        <Route path='/subir' element={<SubirInformes />} />
+        <Route path='/subir/:ing' element={<SubirInformes />} />
       </Routes>
     </BrowserRouter>
   )

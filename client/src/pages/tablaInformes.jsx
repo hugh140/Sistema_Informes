@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
-import { useParams, NavLink } from "react-router-dom"
+import { useParams } from "react-router-dom"
+
 import FilaInformes from "../components/FilaTabla"
 import BotonNavegacion from "../components/BotonNavegacion"
+import NavBar from "../components/NavBar"
 
 import { ENDPOINT } from "../scripts/endpoints"
 
@@ -30,15 +32,7 @@ function TablaInformes()
 
     return (
         <div className="container">
-        <div className="row text-center">
-            <div className="col-lg-4">
-                <NavLink to='/'>
-                    <div className="text-white py-3 ing-card h5">
-                        Inicio
-                    </div>
-                </NavLink>
-            </div>
-        </div>
+        <NavBar />
         <h1 className="text-center display-1">SAIT</h1>
         <BotonNavegacion link={`/consultar/${ing}/`} modo={MODO.RETROCEDER} texto='Atrás' />
 

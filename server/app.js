@@ -131,7 +131,7 @@ app.post('/subir/:ing', (req, res) =>
             if (error) throw res.status(500).json(error)
         })
         alertaArchivos.push({
-            mensaje : `El archivo ${archivo.name} se han subido correctamente`,
+            mensaje : `El archivo ${archivo.name} se ha subido correctamente`,
             estado: 'ok'
         })
     })

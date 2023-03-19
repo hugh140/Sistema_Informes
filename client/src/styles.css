@@ -7,10 +7,46 @@
 }
 
 .alerta-ok {
-    color: green;
+    color: #79C635;
+    font-weight: bold;  
 }
 .alerta-error {
-    color: red;
+    color: #E75656;
+    font-weight: bold;
+}
+
+.submit-btn {
+    width: 20%;
+    background-color: #88C6F0;
+    border: none;
+    font-weight: bold;
+    color: white;
+}
+.submit-btn:hover {
+    background-color: #5AA8DD;
+    color: white;
+}
+
+.file-btn {
+    width: 2rem;
+    height: 2rem;
+    margin-left: 5px;
+    background-color: #F2BABA;
+    color: #C63535;
+    border: 1px solid #C63535;
+    border-radius: 5px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}
+.file-btn:hover {
+    background-color: #E57A7A;
+}
+.file-btn div {
+    width: 100%;
 }
 
 #drag-drop-box input[type=file] {
@@ -19,7 +55,7 @@
 #drag-drop-box {
     border: 2px dashed #88C6F0;
     width: 100%;
-    height: 250px;
+    height: 200px;
 
     display: flex;
     align-items: center;
