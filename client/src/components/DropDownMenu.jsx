@@ -3,11 +3,15 @@ import { useEffect, useState } from "react"
 function DropDownMenu({change, ing, ingenieros}) 
 {   
     return (
+        <>
         <select 
-            defaultValue={ing} 
+            defaultValue='default' 
             className="form-select w-75 d-inline" 
             onChange={change}
         >
+            <option value="default">
+                Seleccionar carpeta...
+            </option>
         {
             ingenieros.map(ingeniero => (
                 <option 
@@ -19,6 +23,7 @@ function DropDownMenu({change, ing, ingenieros})
             ))
         }
         </select>
+        </>
     )
 }
 export default DropDownMenu

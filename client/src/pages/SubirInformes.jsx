@@ -94,6 +94,7 @@ function SubirInformes()
                 change={changeBox}
             />
             <br className="mt-3" />
+            <h6 className="mb-3">Directorio a subir: {selectIng}</h6>
             <DropDownMenu 
                 change={changeSelect} 
                 ing={ing} 
