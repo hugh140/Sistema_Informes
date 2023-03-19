@@ -5,6 +5,13 @@
 .ing-card:hover {
     background-color: #5AA8DD;
 }
+.ing-card-subir {
+    background-color: #ECEC4F;
+    cursor: pointer;
+}
+.ing-card-subir:hover {
+    background-color: #DCDC22;
+}
 
 .alerta-ok {
     color: #79C635;
