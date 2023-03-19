@@ -1,14 +1,20 @@
 const express = require('express')
 const fileUpload = require('express-fileupload')
+const cookieParser = require('cookie-parser')
 const cors = require('cors')
+require('dotenv').config()
 
 const consultarInformes = require('./methods/consultarInformes')
 const consultarIngs = require('./methods/consultarIngs')
 const descargarInformes = require('./methods/descargarInformes')
 const subirInformes = require('./methods/subirInformes')
 
+const verificarUsuario = require('./login_system/verificarUsuario')
+const administrador = require('./login_system/administrador')
+
 const app = express()
 const dirInformes = __dirname + '/informes_tecnicos/'
+const PORT = process.env.PORT || 3000
 
 app.use(cors({
     origin: '*'
@@ -17,6 +23,8 @@ app.use(fileUpload({
     defCharset: 'utf8',
     defParamCharset: 'utf8'
 }));
+app.use(express.urlencoded({extended: true}))
+app.use(cookieParser())
 
 //Método get para consultar archivos del directorio
 app.get('/consultar/:ing/:page', (req, res) => 
@@ -34,4 +42,8 @@ app.get('/descargar/:ing/:archivo', (req, res) =>
 app.post('/subir/:ing', (req, res) => 
     subirInformes(req, res, dirInformes))
 
-app.listen(3000, () => 'Conectado en el puerto 3000')
+//-----LOGIN-----
+app.post('/login', verificarUsuario)
+app.get('/admin', administrador)
+
+app.listen(PORT, () => 'Conectado en el puerto ' + PORT)
