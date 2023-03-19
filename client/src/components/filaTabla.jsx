@@ -1,5 +1,10 @@
+import { ENDPOINT } from "../scripts/endpoints"
+import { useParams} from "react-router-dom"
+
 function FilaInformes({infoArchivos}) 
 {
+    const {ing} = useParams()
+
     return (
         <>{
         Object.values(infoArchivos).map((infoArchivo, index) => {
@@ -11,7 +16,7 @@ function FilaInformes({infoArchivos})
             <tr key={index}>
                 <td>
                     <i className={`fa-solid fa-file-${icon} me-5 h3`}></i>
-                    <a href={'http://localhost:3000/descargar/laura/'+infoArchivo.archivo}>
+                    <a href={ENDPOINT.DESCARGAR + `${ing}/${infoArchivo.archivo}`}>
                         {infoArchivo.archivo}
                     </a>
                 </td>

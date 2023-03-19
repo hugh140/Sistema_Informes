@@ -84,7 +84,7 @@ function SubirInformes()
     return (
         <main className="container">
         <NavBar />
-        <h1 className="text-center display-1">SAIT</h1>
+        <h1 className="text-center display-3">SAIT</h1>
         <form onSubmit={submit}>
             <DragAndDropBox 
                 files={files} 

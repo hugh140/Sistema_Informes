@@ -33,13 +33,14 @@ function TablaInformes()
     return (
         <div className="container">
         <NavBar />
-        <h1 className="text-center display-1">SAIT</h1>
+        <h1 className="text-center display-3">SAIT</h1>
+        <h5>{ing}</h5>
         <BotonNavegacion link={`/consultar/${ing}/`} modo={MODO.RETROCEDER} texto='Atrás' />
 
         {
         status === 404 
             ? 
-        <div class="alert alert-danger my-5" role="alert">
+        <div className="alert alert-danger my-5" role="alert">
             No existen archivos en esta dirección.
         </div> 
             :
