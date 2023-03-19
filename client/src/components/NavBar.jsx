@@ -1,17 +1,11 @@
-import { useState, useEffect } from "react"
-import { NavLink } from "react-router-dom"
+import { useState } from "react"
+import { NavLink, useParams } from "react-router-dom"
 import { ENDPOINT } from "../scripts/endpoints"
 
 function NavBar() 
 {
     const [ingeniero, setIngeniero] = useState('')
-
-    useEffect(() => {
-        fetch(ENDPOINT.CONSULTAR)
-        .then(response => response.json())
-        .then(data => setIngeniero(Object.values(data)[0]))
-        .catch(error => console.log(error))
-    }, [])
+    const {ing} = useParams()
 
     return (
         <div className="row text-center">
@@ -23,7 +17,7 @@ function NavBar()
                 </NavLink>
             </div>
             <div className="col-md-4">
-                <NavLink to={'/subir/' + ingeniero}>
+                <NavLink to={'/subir/' + ing}>
                     <div className="text-white py-3 ing-card h5">
                         Subir Informes
                     </div>

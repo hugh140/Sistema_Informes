@@ -94,7 +94,11 @@ function SubirInformes()
                 change={changeBox}
             />
             <br className="mt-3" />
-            <DropDownMenu change={changeSelect} ing={ing} ingenieros={ingenieros} />
+            <DropDownMenu 
+                change={changeSelect} 
+                ing={ing} 
+                ingenieros={ingenieros} 
+            />
             <input className="btn float-end submit-btn" type="submit" value="Subir" />
         </form>
 

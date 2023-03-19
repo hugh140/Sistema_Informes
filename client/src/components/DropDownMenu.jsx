@@ -1,18 +1,20 @@
+import { useEffect, useState } from "react"
+
 function DropDownMenu({change, ing, ingenieros}) 
-{
+{   
     return (
         <select 
-            value={ing} 
+            defaultValue={ing} 
             className="form-select w-75 d-inline" 
             onChange={change}
         >
         {
-            ingenieros.map(ing => (
+            ingenieros.map(ingeniero => (
                 <option 
-                    key={ing} 
-                    value={ing}
+                    key={ingeniero} 
+                    value={ingeniero}
                 >
-                    {ing}
+                    {ingeniero}
                 </option>
             ))
         }
