@@ -116,12 +116,12 @@ app.post('/subir/:ing', (req, res) =>
                 estado: 'error'
             })
         //Limitar el peso de la subida de archivos a 5mb
-        if (informesArchivo.size >= 5000000)
+        else if (informesArchivo.size >= 5000000) 
             alertaArchivos.push({
                 mensaje: `El archivo ${informesArchivo.name} es demasiado pesado. Solo se aceptan archivos menores a 5MB.`,
                 estado: 'error'
             })
-        archivosVerificados.push(informesArchivo)
+        else archivosVerificados.push(informesArchivo)
     }
 
     //Mover archivos a ./informes_tecnicos/

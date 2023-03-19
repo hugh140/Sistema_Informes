@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { ENDPOINT } from "../scripts/endpoints"
 import subirInforme from "../scripts/subirInformeAPI"
+import detectarExtension from "../scripts/detectarExtension"
 import '../styles.css'
 
 import DragAndDropBox from "../components/DragAndDropBox"
@@ -32,6 +33,13 @@ function SubirInformes()
         if (!files.length) {
             setAlerta([{
                 mensaje: 'No se han subido archivos aún.',
+                estado: 'error'
+            }])
+            return
+        }
+        else if (!detectarExtension(files)) {
+            setAlerta([{
+                mensaje: 'Alguno de los archivos tiene una extensión inválida. Vuelve a subir',
                 estado: 'error'
             }])
             return
