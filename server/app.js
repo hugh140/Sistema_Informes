@@ -18,7 +18,8 @@ const dirInformes = __dirname + '/informes_tecnicos/'
 const PORT = process.env.PORT || 3000
 
 app.use(cors({
-    origin: '*'
+    origin: 'http://localhost:4000',
+    credentials: true
 }))
 app.use(fileUpload({
     defCharset: 'utf8',

@@ -6,8 +6,8 @@ module.exports = function inicio(req, res) {
     console.log(token)
     try {
         const payload = jwt.verify(token, process.env.SECRET)
-        res.json({mensaje: 'Acceso concedido'})
+        res.status(200).json({mensaje: 'Acceso concedido'})
     } catch(e) {
-        res.json({mensaje: 'Se ha presentado el siguiente error: ' + e})
+        res.status(401).json({mensaje: 'Se ha presentado el siguiente error: ' + e})
     }
 }

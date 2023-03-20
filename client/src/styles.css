@@ -13,6 +13,21 @@
     background-color: #DCDC22;
 }
 
+.login {
+    max-width: 400px;
+    margin-top: 2%;
+}
+.login button {
+    background-color: #88C6F0;
+    border: none;
+    font-weight: bold;
+    color: white;
+}
+.login button:hover {
+    background-color: #5AA8DD;
+    color: white;
+}
+
 .alerta-ok {
     color: #79C635;
     font-weight: bold;  

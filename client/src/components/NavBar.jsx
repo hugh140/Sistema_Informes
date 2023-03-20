@@ -23,6 +23,13 @@ function NavBar()
                     </div>
                 </NavLink>
             </div>
+            <div className="col-md-4">
+                <NavLink to='/login'>
+                    <div className="text-white py-3 ing-card h5">
+                        Administrador
+                    </div>
+                </NavLink>
+            </div>
         </div>
     )
 }

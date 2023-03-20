@@ -2,7 +2,7 @@ require('dotenv').config()
 const jwt = require('jsonwebtoken')
 
 const TIEMPO_EXPIRACION = 60 * 5 // Expira en 5 minutos
-const COOKIE_EXPIRACION = TIEMPO_EXPIRACION * 1000
+const COOKIE_EXPIRACION = TIEMPO_EXPIRACION * 10000
 
 module.exports = function verificarUsuario(req, res) {
     const {user, password} = req.query
@@ -14,10 +14,10 @@ module.exports = function verificarUsuario(req, res) {
             process.env.SECRET,
             {expiresIn : TIEMPO_EXPIRACION})
 
-        res.cookie('SAITOKEN', token, {
-            maxAge: COOKIE_EXPIRACION
-        }) 
-        res.json({token: token})
+        res.status(200).json({
+            mensaje: 'Login exitoso.',
+            token: token
+        })
     }
-    else res.json({mensaje: 'Usuario o contraseña incorrectos.'})
+    else res.status(401).json({mensaje: 'Usuario o contraseña incorrectos.'})
 }
