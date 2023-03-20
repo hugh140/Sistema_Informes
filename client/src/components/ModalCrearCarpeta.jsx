@@ -24,7 +24,7 @@ function ModalCrearCarpeta({children})
     const handleChange = e => setNombreCarpeta(e.target.value)
 
     return (
-        <div className="modal fade" id="textModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" id="crearModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -34,7 +34,13 @@ function ModalCrearCarpeta({children})
                     <div className="modal-body">
                         <label htmlFor="inputCarpeta" className="form-label">Nombre de la carpeta:</label>
                         <br />
-                        <input onChange={handleChange} type="text" id="inputCarpeta" className="form-label w-100" />
+                        <input 
+                            onChange={handleChange} 
+                            type="text" 
+                            id="inputCarpeta" 
+                            className="form-label w-100"
+                            autoFocus    
+                        />
                         <div className={"alerta-"+(alerta.pass ? 'ok' : 'error')}>
                             {alerta.mensaje}
                         </div>

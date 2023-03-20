@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react"
 import { ENDPOINT } from "../constants/endpoints"
 import ModalCrearCarpeta from "./ModalCrearCarpeta"
+import ModarEliminarCarpeta from "./ModalEliminarCarpeta"
 
 function PanelAdministrador() 
 {
     const [ingenieros, setIngenieros] = useState([])
+    const [idIng, setIdIng] = useState()
 
     useEffect(() => {
         fetch(ENDPOINT.CONSULTAR)
@@ -13,9 +15,17 @@ function PanelAdministrador()
         .catch(error => console.log(error))
     }, [])
 
-    function eliminarCarpeta(e) {
-        console.log(e.target.dataset.eliminar)
+    function handleClickDelete() {
+        fetch(ENDPOINT.ELIMINAR_CARPETA + `/eliminar?carpeta=${idIng}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        })
+        .then(response => response.text())
+        .then(result => location.reload())
+        .catch(error => console.log('error', error));
     }
+
+    const eliminarCarpeta = e => setIdIng(e.target.dataset.eliminar)
 
     return (
         <div className="row mt-3">
@@ -30,6 +40,8 @@ function PanelAdministrador()
                                 </div>
                                 <button 
                                     className="file-btn" 
+                                    data-bs-toggle='modal'
+                                    data-bs-target='#eliminarModal'
                                     onClick={eliminarCarpeta}
                                 >
                                     <div>
@@ -39,13 +51,14 @@ function PanelAdministrador()
                                         </i>    
                                     </div>
                                 </button>
+                                <ModarEliminarCarpeta handle={handleClickDelete} />
                             </div>
                         ))}
                     </div>
                     <button 
                         className="btn float-btn" 
                         data-bs-toggle="modal" 
-                        data-bs-target="#textModal">
+                        data-bs-target="#crearModal">
                         <i className="fa-solid fa-plus"></i>
                     </button>
                     <ModalCrearCarpeta />
