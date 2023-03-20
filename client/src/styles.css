@@ -48,6 +48,17 @@
     background-color: #5AA8DD;
     color: white;
 }
+.float-btn {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    background-color: #88C6F0;
+    color: white;
+    font-size: 2rem;
+}
+.float-btn:hover {
+    background-color: #5AA8DD;
+    color: white;
+}
 
 .file-btn {
     width: 2rem;
@@ -69,6 +80,13 @@
 }
 .file-btn div {
     width: 100%;
+}
+
+.scroll {
+    display: block;
+    height: 500px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
 }
 
 #drag-drop-box input[type=file] {

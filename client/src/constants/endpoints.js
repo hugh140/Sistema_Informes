@@ -2,5 +2,7 @@
 export const ENDPOINT = {
     CONSULTAR : 'http://localhost:3000/consultar/',
     SUBIR: 'http://localhost:3000/subir/',
-    DESCARGAR: 'http://localhost:3000/descargar/'
+    DESCARGAR: 'http://localhost:3000/descargar/',
+    ADMIN: 'http://localhost:3000/admin',
+    LOGIN: 'http://localhost:3000/login'
 }

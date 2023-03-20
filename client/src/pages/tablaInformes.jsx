@@ -33,7 +33,6 @@ function TablaInformes()
     return (
         <div className="container">
         <NavBar />
-        <h1 className="text-center display-3">SAIT</h1>
         <h5>{ing}</h5>
         <BotonNavegacion link={`/consultar/${ing}/`} modo={MODO.RETROCEDER} texto='Atrás' />
 

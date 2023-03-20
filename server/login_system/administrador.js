@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken')
 
 module.exports = function inicio(req, res) {
     const token = req.cookies.SAITOKEN
-    console.log(token)
     try {
         const payload = jwt.verify(token, process.env.SECRET)
         res.status(200).json({mensaje: 'Acceso concedido'})

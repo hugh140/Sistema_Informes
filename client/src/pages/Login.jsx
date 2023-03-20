@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import Cookies from 'universal-cookie'
 import '../styles.css'
 
+import { ENDPOINT } from "../constants/endpoints"
+
 const cookies = new Cookies()
 
 function Login() 
@@ -12,7 +14,7 @@ function Login()
     const [estado, setEstado] = useState('')
 
     useEffect(() => {
-        fetch("http://localhost:3000/admin", {
+        fetch(ENDPOINT.ADMIN, {
             credentials: "include"
         })
         .then(response => response.ok)
@@ -31,7 +33,7 @@ function Login()
             return
         }
 
-        fetch(`http://localhost:3000/login?user=${usuario}&password=${password}`, {
+        fetch(ENDPOINT.LOGIN + `?user=${usuario}&password=${password}`, {
             method: 'POST',
             redirect: 'follow'
         })

@@ -6,11 +6,6 @@ module.exports = function subirInformes(req, res, dirInformes) {
     if (!req.files || Object.keys(req.files).length === 0)
         throw res.status(400).send('No se ha subido ningún archivo aún.')
 
-    //Verificar carpeta existente, o sino, crearla
-    const dirCarpeta = dirInformes + req.params.ing
-    if (!fs.existsSync(dirCarpeta))
-        fs.mkdirSync(dirCarpeta)
-
     const informesArchivo = req.files.informe
 
     //Verificar si la extensión es correcta (solamente {.doc, .pdf})
