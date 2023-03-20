@@ -2,11 +2,13 @@ import { useState, useEffect } from "react"
 import { ENDPOINT } from "../constants/endpoints"
 import ModalCrearCarpeta from "./ModalCrearCarpeta"
 import ModarEliminarCarpeta from "./ModalEliminarCarpeta"
+import LogOut from "./LogOut"
 
 function PanelAdministrador() 
 {
     const [ingenieros, setIngenieros] = useState([])
     const [idIng, setIdIng] = useState()
+    console.log(idIng)
 
     useEffect(() => {
         fetch(ENDPOINT.CONSULTAR)
@@ -28,6 +30,8 @@ function PanelAdministrador()
     const eliminarCarpeta = e => setIdIng(e.target.dataset.eliminar)
 
     return (
+        <>
+        <LogOut />
         <div className="row mt-3">
             <div className="col-md-6">
                 <div className="position-relative">
@@ -42,9 +46,10 @@ function PanelAdministrador()
                                     className="file-btn" 
                                     data-bs-toggle='modal'
                                     data-bs-target='#eliminarModal'
+                                    data-eliminar={ing}
                                     onClick={eliminarCarpeta}
                                 >
-                                    <div>
+                                    <div data-eliminar={ing}>
                                         <i 
                                             className="fa-solid fa-trash"
                                             data-eliminar={ing} >
@@ -56,7 +61,7 @@ function PanelAdministrador()
                         ))}
                     </div>
                     <button 
-                        className="btn float-btn" 
+                        className="btn float-btn add-dir" 
                         data-bs-toggle="modal" 
                         data-bs-target="#crearModal">
                         <i className="fa-solid fa-plus"></i>
@@ -87,6 +92,7 @@ function PanelAdministrador()
                 </div>
             </div>
         </div>
+        </>
     )
 }
 export default PanelAdministrador

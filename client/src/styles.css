@@ -50,7 +50,6 @@
 }
 .float-btn {
     position: fixed;
-    bottom: 30px; right: 30px;
     background-color: #88C6F0;
     color: white;
     font-size: 2rem;
@@ -58,6 +57,14 @@
 .float-btn:hover {
     background-color: #5AA8DD;
     color: white;
+}
+.add-dir {
+    bottom: 20px;
+    right: 20px;
+}
+.logout {
+    top: 20px;
+    right: 20px;
 }
 
 .file-btn {

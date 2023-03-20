@@ -25,11 +25,10 @@ function ModalCrearCarpeta({children})
 
     return (
         <div className="modal fade" id="crearModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog">
+            <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h1 className="modal-title fs-5" id="exampleModalLabel">Creación de Carpeta</h1>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
                         <label htmlFor="inputCarpeta" className="form-label">Nombre de la carpeta:</label>
@@ -46,8 +45,8 @@ function ModalCrearCarpeta({children})
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" onClick={handleClick} className="btn btn-primary">Crear Carpeta</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
