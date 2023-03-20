@@ -13,6 +13,7 @@ const verificarUsuario = require('./login_system/verificarUsuario')
 const administrador = require('./login_system/administrador')
 const cierreAdministrador = require('./login_system/cierreAdministrador')
 const crearCarpeta = require('./login_system/crearCarpetas')
+const elimiarCarpeta = require('./login_system/eliminarCarpeta')
 
 const app = express()
 const dirInformes = __dirname + '/informes_tecnicos/'
@@ -52,7 +53,11 @@ app.delete('/admin/logout', cierreAdministrador)
 
 //-----Acciones Admin-----
 //Crear carpetas
-app.post('/crear/carpeta', (req, res) => 
+app.post('/carpeta/crear', (req, res) => 
     crearCarpeta(req, res, dirInformes))
+
+//Eliminar carpetas
+app.delete('/carpeta/eliminar', (req, res) =>
+    elimiarCarpeta(req, res, dirInformes))
 
 app.listen(PORT, () => 'Conectado en el puerto ' + PORT)

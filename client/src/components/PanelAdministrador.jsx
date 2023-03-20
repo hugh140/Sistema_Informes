@@ -5,7 +5,6 @@ import ModalCrearCarpeta from "./ModalCrearCarpeta"
 function PanelAdministrador() 
 {
     const [ingenieros, setIngenieros] = useState([])
-    console.log(ingenieros)
 
     useEffect(() => {
         fetch(ENDPOINT.CONSULTAR)
@@ -14,26 +13,29 @@ function PanelAdministrador()
         .catch(error => console.log(error))
     }, [])
 
+    function eliminarCarpeta(e) {
+        console.log(e.target.dataset.eliminar)
+    }
+
     return (
-        <div className="row">
+        <div className="row mt-3">
             <div className="col-md-6">
                 <div className="position-relative">
                     <h5>Carpetas:</h5>
                     <div className="p-3 border border-secondary-subtle rounded scroll position-relative">
-                        {ingenieros.map(ing => (
-                            <div key={ing} className="alert alert-light text-black d-flex file-delete">
+                        {ingenieros.map((ing, index) => (
+                            <div key={index} className="alert alert-light text-black d-flex file-delete">
                                 <div className="flex-grow-1 file-name">
                                     {ing}
                                 </div>
                                 <button 
                                     className="file-btn" 
-                                    // onClick={eliminarArchivo}
+                                    onClick={eliminarCarpeta}
                                 >
                                     <div>
                                         <i 
                                             className="fa-solid fa-trash"
-                                            // data-eliminar={index} 
-                                        >
+                                            data-eliminar={ing} >
                                         </i>    
                                     </div>
                                 </button>

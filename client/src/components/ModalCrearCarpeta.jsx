@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { ENDPOINT } from "../constants/endpoints"
 
 function ModalCrearCarpeta({children}) 
 {
@@ -8,7 +9,7 @@ function ModalCrearCarpeta({children})
     function handleClick(e) {
         if (!nombreCarpeta) return
 
-        fetch(`http://localhost:3000/crear/carpeta?ing=${nombreCarpeta}`, {
+        fetch(ENDPOINT.CREAR_CARPETA + `crear?ing=${nombreCarpeta}`, {
             method: 'POST',
             credentials: 'include'
         })

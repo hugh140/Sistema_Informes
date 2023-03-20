@@ -51,7 +51,7 @@ module.exports = function subirInformes(req, res, dirInformes) {
 
     //Mover archivos a ./informes_tecnicos/
     archivosVerificados.forEach(archivo => {
-        const dirSubida = dirCarpeta + '/' + archivo.name
+        const dirSubida = dirInformes + '/' + req.params.ing + '/' + archivo.name
         archivo.mv(dirSubida, 'ut8', (error) => {
             if (error) throw res.status(500).json(error)
         })

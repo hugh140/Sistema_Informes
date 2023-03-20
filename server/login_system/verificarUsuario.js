@@ -12,6 +12,8 @@ module.exports = function verificarUsuario(req, res) {
             {nombre: 'hugo'}, 
             process.env.SECRET,
             {expiresIn : '1h'})
+            
+        res.cookie('SAITOKEN', token)
 
         res.status(200).json({
             mensaje: 'Login exitoso.',
