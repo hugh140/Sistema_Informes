@@ -12,7 +12,7 @@ function detectarAlertas(archivos, ing)
     else if (!detectarPeso(archivos))
         return alertas.pesoExagerado
 
-    else if (ing === 'undefined')
+    else if (ing == 'undefined' || ing == 'default')
         return alertas.selectorIng
 
     else return alertas.cargando

@@ -9,10 +9,12 @@ module.exports = function crearCarpeta(req, res, dirInformes)
         
         //Verificar carpeta existente, o sino, crearla
         const dirCarpeta = dirInformes + req.query.carpeta
-        console.log(dirCarpeta)
-        fs.rmSync(dirCarpeta, { 
+        
+        fs.rm(dirCarpeta, { 
+            recursive: true, force: true
+        }, () => fs.rmSync(dirCarpeta, { 
             recursive: true, force: true 
-        })
+        }));
 
         return res.status(200).json({
             mensaje: 'Carpeta eliminada exitosamente.'

@@ -7,10 +7,17 @@ module.exports = function subirInformes(req, res, dirInformes) {
         throw res.status(400).send('No se ha subido ningún archivo aún.')
 
     const informesArchivo = req.files.informe
+    const carpetaIng = req.params.ing
 
     //Verificar si la extensión es correcta (solamente {.doc, .pdf})
     let archivosVerificados = []
     let alertaArchivos = []
+
+    if (!carpetaIng || carpetaIng == 'undefined' || carpetaIng == 'default')
+        return res.status(400).json({
+            mensaje: 'La carpeta es incorrecta',
+            estado: 'error'
+        })
 
     //Por si existen varios archivos
     if (informesArchivo.length) {
