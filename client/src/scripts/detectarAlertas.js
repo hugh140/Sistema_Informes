@@ -1,7 +1,7 @@
 import { PESO, alertas, extensionesValidas } 
     from "../constants/constantesAlertas"
 
-function detectarAlertas(archivos) 
+function detectarAlertas(archivos, ing) 
 {
     if (!archivos.length) 
         return alertas.faltaArchivos
@@ -11,6 +11,9 @@ function detectarAlertas(archivos)
 
     else if (!detectarPeso(archivos))
         return alertas.pesoExagerado
+
+    else if (ing === 'undefined')
+        return alertas.selectorIng
 
     else return alertas.cargando
 } 

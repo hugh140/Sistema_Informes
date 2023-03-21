@@ -34,6 +34,17 @@ function AdminPage()
         .catch(error => console.log(error))
     }, [])
 
+    function consultarInformes(ingSelected = idIng, nPagina = 1) {
+        fetch(ENDPOINT.CONSULTAR + `${ingSelected}/${nPagina}`)
+        .then(response => {
+            if (response.ok)
+                return response.json()
+            else return []
+        })
+        .then(result => setArchivos(result))
+        .catch(error => console.log(error));
+    }
+
     function handleClickCarpeta() {
         fetch(ENDPOINT.ELIMINAR_CARPETA + `?carpeta=${idIng}`, {
             method: 'DELETE',
@@ -59,18 +70,24 @@ function AdminPage()
     function seleccionarCarpeta(e) {
         const ingSelected = e.target.dataset.eliminar
         setIdIng(ingSelected)
+        setNumPage(1)
         setIsSelected(ingenieros.map(ing => {
             return ingSelected === ing ? true : false
         }))
-        fetch(ENDPOINT.CONSULTAR + `${ingSelected}/${numPage}`)
-        .then(response => {
-            if (response.ok)
-                return response.json()
-            else return []
-        })
-        .then(result => setArchivos(result))
-        .catch(error => console.log(error));
+        consultarInformes(ingSelected)
     }
+
+    function retrocederPagina() {
+        const siguientePagina = !(numPage - 1) ? 1 : (numPage - 1)
+        setNumPage(siguientePagina)
+        consultarInformes(idIng, siguientePagina)
+    }
+    function avanzarPagina() {
+        const siguientePagina = numPage + 1
+        setNumPage(siguientePagina)
+        consultarInformes(idIng, siguientePagina)
+    }
+
     const eliminarCarpeta = e => setIdIng(e.target.dataset.eliminar)
     const eliminarArchivo = e => {
         setIdArchivo(e.target.dataset.archivo)
@@ -94,6 +111,10 @@ function AdminPage()
                     archivos={archivos}
                     eliminarArchivo={eliminarArchivo}
                     handleEliminarArchivo={handleClickArchivo}
+
+                    retrocederPagina={retrocederPagina}
+                    avanzarPagina={avanzarPagina}
+                    pagina={numPage}
                 /> 
                 : 
                 <div className="alert alert-danger">

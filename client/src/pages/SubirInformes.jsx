@@ -35,8 +35,7 @@ function SubirInformes()
     function submit(e) {
         e.preventDefault()
 
-        const alertaConsola = detectarAlertas(files)
-        console.log(alertaConsola)
+        const alertaConsola = detectarAlertas(files, selectIng)
         setAlerta([alertaConsola])
         if (alertaConsola.estado === 'error') return
 

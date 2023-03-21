@@ -20,6 +20,10 @@ const alertas = {
         mensaje: 'Alguno de los archivos tiene un peso mayor a 5mb. Vuelve a subir',
         estado: 'error'
     },
+    selectorIng : {
+        mensaje: 'Seleccione alguna carpeta antes de continuar.',
+        estado: 'error'
+    },
     cargando : {
         mensaje: 'Subiendo los archivos...',
         estado: 'cargando'

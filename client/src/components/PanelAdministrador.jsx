@@ -4,7 +4,8 @@ import LogOut from "./LogOut"
 
 function PanelAdministrador(
     {ingenieros, isSelected, seleccionarCarpeta, eliminarCarpeta, handleEliminarCarpeta, 
-        archivos = [], eliminarArchivo, handleEliminarArchivo}
+        archivos = [], eliminarArchivo, handleEliminarArchivo, avanzarPagina, retrocederPagina,
+        pagina}
     ) 
 {
     return (
@@ -68,10 +69,13 @@ function PanelAdministrador(
                 <h5>Informes:</h5>
                 <div className="p-3 border border-secondary-subtle rounded scroll">
                     <div className="text-black mb-3 w-auto position-relative py-3 d-flex">
-                        <button className="btn float-btn position-absolute top-0 start-0">
+                        <button onClick={retrocederPagina} className="btn float-btn position-absolute top-0 start-0">
                             <i className="fa-solid fa-arrow-left"></i>
                         </button>
-                        <button className="btn float-btn position-absolute top-0 end-0">
+                        <div className="position-absolute top-50 start-50 translate-middle">
+                            {pagina}
+                        </div>
+                        <button onClick={avanzarPagina} className="btn float-btn position-absolute top-0 end-0">
                             <i className="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
