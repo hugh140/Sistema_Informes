@@ -3,6 +3,7 @@ import Cookies from 'universal-cookie'
 import '../styles.css'
 
 import { ENDPOINT } from "../constants/endpoints"
+import { redir } from "../constants/endpoints"
 
 const cookies = new Cookies()
 
@@ -19,7 +20,7 @@ function Login()
         })
         .then(response => response.ok)
         .then(result => {
-            if (result) window.location.href = "http://localhost:4000/admin"
+            if (result) window.location.href = redir + "/admin"
         })
         .catch(error => console.log('error', error));
     }, [])
@@ -45,7 +46,7 @@ function Login()
             setAlerta(result)
             if (result.token) {
                 cookies.set('SAITOKEN', result.token, {path: '/'})
-                window.location.href = "http://localhost:4000/admin"
+                window.location.href = redir + "/admin"
             }
         })
         .catch(error => console.log('error', error));

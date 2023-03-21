@@ -1,12 +1,15 @@
 //Endpoints
+const dir = 'http://172.19.0.19:3000'
+export const redir = 'http://172.19.0.19:4000'
+
 export const ENDPOINT = {
-    CONSULTAR : 'http://localhost:3000/consultar/',
-    SUBIR: 'http://localhost:3000/subir/',
-    DESCARGAR: 'http://localhost:3000/descargar/',
-    ADMIN: 'http://localhost:3000/admin',
-    LOGIN: 'http://localhost:3000/login',
-    CREAR_CARPETA: 'http://localhost:3000/carpeta/',
-    ELIMINAR_CARPETA: 'http://localhost:3000/carpeta/eliminar',
-    ELIMINAR_INFORME: 'http://localhost:3000/informe/eliminar',
-    LOGOUT: 'http://localhost:3000/admin/logout'
+    CONSULTAR : dir +'/consultar/',
+    SUBIR: dir + '/subir/',
+    DESCARGAR: dir + '/descargar/',
+    ADMIN: dir + '/admin',
+    LOGIN: dir + '/login',
+    CREAR_CARPETA: dir + '/carpeta/',
+    ELIMINAR_CARPETA: dir + '/carpeta/eliminar',
+    ELIMINAR_INFORME: dir + '/informe/eliminar',
+    LOGOUT: dir + '/admin/logout'
 }

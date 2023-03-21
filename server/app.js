@@ -20,7 +20,12 @@ const dirInformes = __dirname + '/informes_tecnicos/'
 const PORT = process.env.PORT || 3000
 
 app.use(cors({
-    origin: 'http://localhost:4000',
+    origin: [
+        'http://172.19.0.19:4000', 
+        'http://localhost:4000', 
+        'https://kit.fontawesome.com',
+        'https://ka-f.fontawesome.com'
+    ],
     credentials: true
 }))
 app.use(fileUpload({

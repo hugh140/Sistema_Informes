@@ -1,4 +1,4 @@
-import { ENDPOINT } from "../constants/endpoints";
+import { ENDPOINT, redir } from "../constants/endpoints";
 import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
@@ -6,7 +6,7 @@ const cookies = new Cookies()
 function LogOut()
 {
     function handleLogOut() {
-        location.href = 'http://localhost:4000'
+        location.href = redir
         cookies.remove('SAITOKEN', { path: '/' })
     }
 
