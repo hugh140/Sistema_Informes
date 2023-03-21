@@ -49,20 +49,16 @@
     color: white;
 }
 .float-btn {
-    position: fixed;
     background-color: #88C6F0;
     color: white;
-    font-size: 2rem;
+    font-size: 1rem;
 }
 .float-btn:hover {
     background-color: #5AA8DD;
     color: white;
 }
-.add-dir {
-    bottom: 20px;
-    right: 20px;
-}
 .logout {
+    position: fixed;
     top: 20px;
     right: 20px;
 }
@@ -87,6 +83,12 @@
 }
 .file-btn div {
     width: 100%;
+}
+.folder-selected {
+    background-color: #E5FAF5;
+}
+.cursor {
+    cursor: pointer;
 }
 
 .scroll {

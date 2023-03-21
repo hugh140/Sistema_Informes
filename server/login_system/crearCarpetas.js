@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken')
 module.exports = function crearCarpeta(req, res, dirInformes) 
 {
     const token = req.cookies.SAITOKEN
-    console.log(token)
     try {
         const payload = jwt.verify(token, process.env.SECRET)
         

@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken')
 
 const TIEMPO_EXPIRACION = 60 * 30 // Expira en 30 minutos
 
-module.exports = function verificarUsuario(req, res) {
+module.exports = function verificarUsuario(req, res) 
+{
     const {user, password} = req.query
     if (user === process.env.USER &&
         password === process.env.PASSWORD) 

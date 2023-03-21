@@ -4,7 +4,6 @@ const { extname } = require('path')
 module.exports = function consultarInformes(req, res, dirInformes) {
     //Dirección del directorio para la consulta
     const dirConsulta = dirInformes + req.params.ing
-    console.log(dirConsulta)
     let archivos = []
 
     //Consultar el directorio

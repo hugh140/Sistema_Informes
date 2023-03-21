@@ -12,7 +12,8 @@ const subirInformes = require('./methods/subirInformes')
 const verificarUsuario = require('./login_system/verificarUsuario')
 const administrador = require('./login_system/administrador')
 const crearCarpeta = require('./login_system/crearCarpetas')
-const elimiarCarpeta = require('./login_system/eliminarCarpeta')
+const eliminarCarpeta = require('./login_system/eliminarCarpeta')
+const eliminarInforme = require('./login_system/eliminarArchivos')
 
 const app = express()
 const dirInformes = __dirname + '/informes_tecnicos/'
@@ -50,12 +51,17 @@ app.post('/login', verificarUsuario)
 app.get('/admin', administrador)
 
 //-----Acciones Admin-----
+
 //Crear carpetas
 app.post('/carpeta/crear', (req, res) => 
     crearCarpeta(req, res, dirInformes))
 
 //Eliminar carpetas
 app.delete('/carpeta/eliminar', (req, res) =>
-    elimiarCarpeta(req, res, dirInformes))
+    eliminarCarpeta(req, res, dirInformes))
+
+//Eliminar informes
+app.delete('/informe/eliminar', (req, res) =>
+    eliminarInforme(req, res, dirInformes))
 
 app.listen(PORT, () => 'Conectado en el puerto ' + PORT)

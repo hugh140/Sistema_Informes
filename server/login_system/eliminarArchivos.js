@@ -1,22 +1,18 @@
 const fs = require('fs')
 const jwt = require('jsonwebtoken')
 
-module.exports = function crearCarpeta(req, res, dirInformes) 
+module.exports = function eliminarInforme(req, res, dirInformes) 
 {
     const token = req.cookies.SAITOKEN
     try {
         const payload = jwt.verify(token, process.env.SECRET)
         
-        //Verificar carpeta existente, o sino, crearla
-        const dirCarpeta = dirInformes + req.query.carpeta
-        console.log(dirCarpeta)
-        fs.rmSync(dirCarpeta, { 
-            recursive: true, force: true 
-        })
+        const dirInforme = dirInformes + `${req.query.ing}/` + req.query.informe
+        fs.unlinkSync(dirInforme)
 
         return res.status(200).json({
-            mensaje: 'Carpeta eliminada exitosamente.'
-    })
+            mensaje: 'Informe eliminado exitosamente.'
+        })
     } 
     catch(e) {
         res.status(401).json({

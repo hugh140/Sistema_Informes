@@ -1,34 +1,12 @@
-import { useState, useEffect } from "react"
-import { ENDPOINT } from "../constants/endpoints"
 import ModalCrearCarpeta from "./ModalCrearCarpeta"
 import ModarEliminarCarpeta from "./ModalEliminarCarpeta"
 import LogOut from "./LogOut"
 
-function PanelAdministrador() 
+function PanelAdministrador(
+    {ingenieros, isSelected, seleccionarCarpeta, eliminarCarpeta, handleEliminarCarpeta, 
+        archivos = [], eliminarArchivo, handleEliminarArchivo}
+    ) 
 {
-    const [ingenieros, setIngenieros] = useState([])
-    const [idIng, setIdIng] = useState()
-    console.log(idIng)
-
-    useEffect(() => {
-        fetch(ENDPOINT.CONSULTAR)
-        .then(response => response.json())
-        .then(data => setIngenieros(data))
-        .catch(error => console.log(error))
-    }, [])
-
-    function handleClickDelete() {
-        fetch(ENDPOINT.ELIMINAR_CARPETA + `/eliminar?carpeta=${idIng}`, {
-            method: 'DELETE',
-            credentials: 'include'
-        })
-        .then(response => response.text())
-        .then(result => location.reload())
-        .catch(error => console.log('error', error));
-    }
-
-    const eliminarCarpeta = e => setIdIng(e.target.dataset.eliminar)
-
     return (
         <>
         <LogOut />
@@ -37,15 +15,39 @@ function PanelAdministrador()
                 <div className="position-relative">
                     <h5>Carpetas:</h5>
                     <div className="p-3 border border-secondary-subtle rounded scroll position-relative">
+                        <form className="alert alert-light text-black d-flex file-delete">
+                            <button 
+                                className="btn float-btn add-dir" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#crearModal"
+                                id="agregarCarpeta"
+                                type="button"
+                            >
+                                <i className="fa-solid fa-plus"></i>
+                            </button>
+                            <ModalCrearCarpeta />
+                            <label htmlFor="agregarCarpeta" className="ms-3 d-flex align-items-center cursor">
+                                Agregar nueva carpeta.
+                            </label>
+                        </form>
                         {ingenieros.map((ing, index) => (
-                            <div key={index} className="alert alert-light text-black d-flex file-delete">
-                                <div className="flex-grow-1 file-name">
+                            <div 
+                                key={index} 
+                                className={"alert alert-light text-black d-flex cursor " +
+                                    (isSelected[index] === true ? 'folder-selected' : null)}
+                                data-eliminar={ing}
+                                onClick={seleccionarCarpeta}
+                            >
+                                <div 
+                                    className="flex-grow-1 file-name"
+                                    data-eliminar={ing}
+                                >
                                     {ing}
                                 </div>
                                 <button 
                                     className="file-btn" 
                                     data-bs-toggle='modal'
-                                    data-bs-target='#eliminarModal'
+                                    data-bs-target='#eliminarDir'
                                     data-eliminar={ing}
                                     onClick={eliminarCarpeta}
                                 >
@@ -56,39 +58,51 @@ function PanelAdministrador()
                                         </i>    
                                     </div>
                                 </button>
-                                <ModarEliminarCarpeta handle={handleClickDelete} />
+                                <ModarEliminarCarpeta handle={handleEliminarCarpeta} id='eliminarDir' />
                             </div>
                         ))}
                     </div>
-                    <button 
-                        className="btn float-btn add-dir" 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#crearModal">
-                        <i className="fa-solid fa-plus"></i>
-                    </button>
-                    <ModalCrearCarpeta />
                 </div>
             </div>
             <div className="col-md-6">
                 <h5>Informes:</h5>
                 <div className="p-3 border border-secondary-subtle rounded scroll">
-                    <div className="alert alert-light text-black d-flex file-delete">
-                        <div className="flex-grow-1 file-name">
-                            hola
-                        </div>
-                        <button 
-                            className="file-btn" 
-                            // onClick={eliminarArchivo}
-                        >
-                            <div>
-                                <i 
-                                    className="fa-solid fa-trash"
-                                    // data-eliminar={index} 
-                                >
-                                </i>    
-                            </div>
+                    <div className="text-black mb-3 w-auto position-relative py-3 d-flex">
+                        <button className="btn float-btn position-absolute top-0 start-0">
+                            <i className="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <button className="btn float-btn position-absolute top-0 end-0">
+                            <i className="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
+                    {archivos.map((archivo, index) => (
+                        <div key={index} className="alert alert-light text-black d-flex">
+                            <div className="flex-grow-1 file-name">
+                                {archivo.archivo}
+                            </div>
+                            <button 
+                                className="file-btn" 
+                                data-bs-toggle='modal'
+                                data-bs-target='#eliminarInf'
+                                data-archivo={archivo.archivo}
+                                data-id={index}
+                                onClick={eliminarArchivo}
+                            >
+                                <div 
+                                    data-archivo={archivo.archivo}
+                                    data-id={index}
+                                >
+                                    <i 
+                                        className="fa-solid fa-trash"
+                                        data-archivo={archivo.archivo}
+                                        data-id={index}
+                                    >
+                                    </i>    
+                                </div>
+                            </button>
+                            <ModarEliminarCarpeta handle={handleEliminarArchivo} id='eliminarInf' />
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

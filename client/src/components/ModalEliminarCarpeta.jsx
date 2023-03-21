@@ -1,6 +1,6 @@
-function ModarEliminarCarpeta({handle}) {
+function ModarEliminarCarpeta({handle, id}) {
     return (
-        <div className="modal fade" id="eliminarModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" id={id} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -13,8 +13,11 @@ function ModarEliminarCarpeta({handle}) {
                         <button 
                             type="button" 
                             className="btn btn-primary"
-                            onClick={handle}    
-                        >Confirmar</button>
+                            onClick={handle}   
+                            data-bs-dismiss="modal"
+                        >   
+                            Confirmar
+                        </button>
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
