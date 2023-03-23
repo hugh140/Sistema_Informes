@@ -20,6 +20,13 @@ npm install
 ```
 * De igual manera se aplica el mismo código pero dentro de la carpeta **./server/**.
 * Dentro de la carpeta **./server/**, crear una carpeta llamada **./informes_tecnicos/**, esta es la carpeta donde se almacenarán todos los informes técnicos requeridos.
+* También, en **./server**, crear un archivo **.env** que es donde se especificarán las variables del entorno. la estructura recomendable es la siguiente:
+```shell
+SECRET='agregar algún contenido, de preferencia una clave hash'
+PORT='agregar el puerto donde se alojará el servidor, por ejemplo 3000'
+USER='agregar el usuario para el inicio de sesión, ejemplo: msti'
+PASSWORD='agregar la contraseña que va a requerir el administrador para iniciar sesión.'
+```
 Con todo este procedimiento, ya debería de tener instalado el proyecto. A continuación se detallarán las dependencias utilizadas en este proyecto.
 
 ## Dependencias
@@ -78,4 +85,95 @@ export default defineConfig({
 })
 ```
 
+### Servidor
+Para iniciar el servidor local que utilizará el servidor, existen dos alternativas:
+* Ejecutar el comando predeterminado de Nodejs para ejecutar scripts, node:
+```bash
+node ./server/app.js
+```
+* Ejecutar el script por medio de un paquete llamado [Nodemon](https://www.npmjs.com/package/nodemon):
+```bash
+nodemon ./server/app.js
+```
+Las ventajas del último comando comparado del primero, es que puede ejecutar el script después de haberse realizado cambios, sin necesidad de reiniciar el servidor nuevamente.
 
+Para instalarlo, se utiliza el siguiente comando:
+```bash
+npm i nodemon
+```
+Así, se ejecutará el script ./app.js (que es la base de toda la funcionalidad back-end de la aplicación) en el puerto 3000 de forma predeterminada.
+
+### ¿Cómo cambiar el puerto del servidor?
+El puerto se lo puede cambiar dentro de app.listen, que está ubicado en ./app.js, pero no es recomendable cambiarlo directamente desde ahí, sino que se puede utilizar la constante PORT que se ubica dentro del mismo script, o cambiarlo desde las variables del entorno, ejemplo:
+```shell
+PORT=1234
+```
+
+## Estructura de las carpetas:
+### Cliente
+```shell
+client/
+├── src/
+├── index.html
+```
+Dentro de la carpeta **./cliente** se puede encontrar un solo archivo importante, el cual es **./index.html**, el cuál se encarga de generar el estado primitivo de la aplicación web.
+
+Aquí se encuentran algunos links para utilizar [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/) el cual es un framework front-end con clases y herramientas escritas en CSS y JS para realizar algunos componentes de una manera más rápida.
+
+También está adjunto un kit de [Font Awesome](https://fontawesome.com/icons) para los íconos utilizados dentro de la aplicación.
+
+```shell
+client/
+├── src/
+│   ├── components/
+│   ├── constants/
+│   ├── pages/
+│   ├── scripts/
+│   ├── App.jsx
+│   ├── main.jsx
+│   ├── styles.css
+├── index.html
+```
+Dentro de la carpeta **./src** es donde se ubica todo el funcionamiento de la página, donde **./main.jsx** contiene el script principal para que la aplicación pueda funcionar.
+
+Dentro de **./App.jsx se encuentra el routeo de las páginas usando React Router, si se desea agregar un nuevo link, solo se debe de agregar un nuevo componente <Route> dentro de <Routes> con el respectivo nuevo componente. Es recomendable leer la documentación de [React Router](https://reactrouter.com/en/main)
+```jsx
+<BrowserRouter forceRefresh={true}>
+  <Routes>
+    <Route path='/consultar/:ing/:id' element={<TablaInformes />} />
+    <Route path='/' element={<ElegirIng />} />
+    <Route path='/subir/:ing' element={<SubirInformes />} />
+
+    //Login
+    <Route path='/login' element={<Login />} />
+    <Route path='/admin' element={<AdminPage />} />
+  </Routes>
+</BrowserRouter>
+```
+Todos los componentes de las páginas están guardados dentro de la carpeta **./pages**. Y para importar la página dentro de **./App.jsx**, usar la siguiente línea ejemplo:
+```js
+import TablaInformes from "./pages/TablaInformes"
+```
+
+Dentro de la carpeta **./components** se encuentran componentes de React que pueden ser reutilizados, pero normalmente son componentes muy específicos. Si se desea agregar nuevos componentes, es la carpeta correspondiente.
+
+Dentro de la carpeta **./constants** se ubican algunas constantes que utiliza la aplicación, el archivo que importa más es **./endpoints** porque aquí está la configuración de todos los endpoints del servidor que se utilizan en el cliente. Por lo que es una carpeta importante para configurar la ip de estos endpoints.
+
+Para configurarlos, solo se debe de cambiar la ip de las contastes dir y redir, y dentro de ENDPOINT, solo agregar si se ha creado algún nuevo endpoint.
+```js
+const dir = 'http://172.19.0.19:3000' // <- Cambiar solo la ip, y el puerto (que es del servidor) si es necesario
+export const redir = 'http://172.19.0.19:4000' // <- Cambiar solo la ip, y el puerto (que es del cliente) si es necesario
+
+export const ENDPOINT = {
+    CONSULTAR : dir +'/consultar/',
+    SUBIR: dir + '/subir/',
+    DESCARGAR: dir + '/descargar/',
+    ADMIN: dir + '/admin',
+    LOGIN: dir + '/login',
+    CREAR_CARPETA: dir + '/carpeta/',
+    ELIMINAR_CARPETA: dir + '/carpeta/eliminar',
+    ELIMINAR_INFORME: dir + '/informe/eliminar',
+    LOGOUT: dir + '/admin/logout'
+}
+```
+Por último, dentro de la carpeta **./scripts**, se encuentran algunos scripts para reducir el código de algunos componentes, y convertir sus acciones en funciones.
