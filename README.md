@@ -1,6 +1,13 @@
 # Sistema de Archivado de Informes Técnicos (SAIT)
 SAIT es un proyecto realizado para agilizar la búsqueda y recopilación de informes técnicos dentro de la SENESCYT.
 
+# Índice
+1. [Guía de Instalación](#guía-de-instalación)
+2. [Dependencias](#dependencias)
+3. [Inicio del Servidor Local](#inicio-del-servidor-local)
+4. [Estructura de las Carpetas](#estructura-de-las-carpetas)
+5. [Anexos](#anexos)
+
 ## Guía de Instalación
 Es necesario tener [NodeJS](https://nodejs.org/en) instalado en el sistema para poder utilizar NPM y sus comandos.
 
@@ -84,6 +91,15 @@ export default defineConfig({
   },
 })
 ```
+No olvidar que el servidor proporciona algunos endpoints para que la aplicación tenga un funcionamiento dinámico, por lo que dentro de **./client/src/constants/endpoints.js** se debe hacer su respectiva configuración para que pueda reconocer los métodos correctamente, por ejemplo:
+```js
+const dir = 'http://172.19.0.19:3000' // <- Cambiar solo la ip, y el puerto (que es del servidor) si es necesario
+export const redir = 'http://172.19.0.19:4000' // <- Cambiar solo la ip, y el puerto (que es del cliente) si es necesario
+```
+La ip corresponde a la ip de la computadora que está sirviendo de servidor local, la ip se consigue dentro de la dirección IPV4 utilizando el comando:
+```bash
+ipconfig
+```
 
 ### Servidor
 Para iniciar el servidor local que utilizará el servidor, existen dos alternativas:
@@ -144,7 +160,7 @@ Dentro de **./App.jsx se encuentra el routeo de las páginas usando React Router
     <Route path='/' element={<ElegirIng />} />
     <Route path='/subir/:ing' element={<SubirInformes />} />
 
-    //Login
+    <!-- Login -->
     <Route path='/login' element={<Login />} />
     <Route path='/admin' element={<AdminPage />} />
   </Routes>
@@ -177,3 +193,56 @@ export const ENDPOINT = {
 }
 ```
 Por último, dentro de la carpeta **./scripts**, se encuentran algunos scripts para reducir el código de algunos componentes, y convertir sus acciones en funciones.
+
+### Servidor
+```shell
+server/
+├── login_system/
+├── methods/
+├── scripts/
+├── app.js
+```
+ 
+Dentro de la carpeta **./server**, se encuentra el archivo más importante de toda la aplicación, es cual es **./app.js**, que es donde se aloja las importaciones de métodos, dependencias, middlewares y el funcionamiento del servidor local.
+  
+Dentro de este script, se pueden configurar algunas cosas, como lo es el puerto del servidor, el directorio donde se almacenan los informes técnicos, y las páginas origen usando CORS. Procedo a explicar las configuraciones:
+```js
+const dirInformes = __dirname + '/informes_tecnicos/' // <- Para cambiar la dirección de los informes
+const PORT = process.env.PORT || 3000 // <- Para cambiar el puerto del servidor (recomendado dejarlo así)
+
+app.use(cors({
+  // Configuración de páginas aceptadas por CORS, si existe algún error referente a esto, aquí se soluciona
+  origin: [
+      'http://172.19.0.19:4000', 
+      'http://localhost:4000', 
+      'https://kit.fontawesome.com',
+      'https://ka-f.fontawesome.com'
+  ],
+  credentials: true
+}))
+app.use(fileUpload({
+  // Configuración de los caracteres al momento de guardar y obtener el nombre de archivos o carpetas.
+  defCharset: 'utf8',
+  defParamCharset: 'utf8'
+}));
+```
+  
+Posterior a todas las configuraciones, se ubican los métodos que proporciona la API para algunas acciones como lo son el sistema de subida de archivos, la obtención de los mismos, y el funcionamiento del login. Ejemplo:
+```js
+//Método get para consultar archivos del directorio
+app.get('/consultar/:ing/:page', (req, res) => 
+    consultarInformes(req, res, dirInformes))
+```
+
+Todas las funciones utilizados en los métodos se encuentran en la carpeta **./methods**, si se desea agregar un nuevo método, agregarlo dentro de esta carpeta y llamarlo posteriormente al script **./app.js**.
+  
+Pero no solo la carpeta **./methos** contiene métodos para la API, sino también la carpeta **./login_system**, que son los métodos encargados únicamente para el funcionamiento del login de usuarios, y los permisos que tienen los administradores.
+  
+Por último estaría la carpeta **./scripts**, que es la carpeta donde se pueden adjuntar scripts que pueden ser necesarios para el correcto funcionamiento de los métodos.
+  
+## Anexos
+### [Utilización de Vite](https://www.youtube.com/watch?v=UX4gvort2TU)
+### [Curso de React](https://www.youtube.com/watch?v=rLoWMU4L_qE)
+### [Curso de React Router](https://www.youtube.com/watch?v=7xRVnmWcTE8)
+### [Curso de Express](https://www.youtube.com/watch?v=JmJ1WUoUIK4)
+### [Uso de Cookies en Nodejs](https://www.youtube.com/watch?v=E0DONK-TzCI)
